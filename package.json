@@ -7,11 +7,11 @@
     "dev": "node -e \"const { spawn } = require('child_process'); const filteredArgs = process.argv.slice(1).filter(arg => !['--host', '--port', '0.0.0.0', '3000'].includes(arg)); spawn('npx', ['next', 'dev', '-p', '3000', '-H', '0.0.0.0', ...filteredArgs], { stdio: 'inherit', shell: true })\"",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint ."
   },
   "dependencies": {
     "@google/genai": "^1.29.0",
-    "better-sqlite3": "^12.4.1",
+    "@supabase/supabase-js": "^2.99.1",
     "lucide-react": "^0.546.0",
     "motion": "^12.23.24",
     "next": "^16.1.6",

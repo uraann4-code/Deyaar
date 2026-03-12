@@ -1,20 +1,5 @@
 import { NextResponse } from 'next/server';
-import Database from 'better-sqlite3';
-import path from 'path';
-
-const dbPath = path.resolve(process.cwd(), 'enquiries.db');
-const db = new Database(dbPath);
-
-// Initialize database
-db.exec(`
-  CREATE TABLE IF NOT EXISTS enquiries (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    phone TEXT,
-    city TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  )
-`);
+import { supabase } from '../../../lib/supabase';
 
 export async function POST(request: Request) {
   try {
@@ -25,12 +10,19 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
     }
 
-    const stmt = db.prepare('INSERT INTO enquiries (name, phone, city) VALUES (?, ?, ?)');
-    stmt.run(name, phone, city);
+    const { error } = await supabase
+      .from('enquiries')
+      .insert([{ name, phone, city }]);
+
+    if (error) {
+      console.error('Supabase error:', error);
+      return NextResponse.json({ error: 'Failed to save enquiry' }, { status: 500 });
+    }
 
     return NextResponse.json({ message: 'Enquiry saved successfully' });
   } catch (error) {
-    console.error('Database error:', error);
+    console.error('Server error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
+
