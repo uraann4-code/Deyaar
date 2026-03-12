@@ -19,7 +19,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
     setError('');
 
     try {
-      const response = await fetch('/api/enquiries.php', {
+      const response = await fetch('/api/enquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
