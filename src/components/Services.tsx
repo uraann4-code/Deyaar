@@ -26,7 +26,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 bg-cream overflow-hidden">
+    <section id="services" className="py-24 bg-cream overflow-hidden scroll-mt-20">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div>

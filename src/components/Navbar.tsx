@@ -21,7 +21,7 @@ export default function Navbar({ onEnquire }: NavbarProps) {
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? 'bg-white/90 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-6'
+        isScrolled ? 'bg-white/90 backdrop-blur-md py-4 shadow-sm text-ink' : 'bg-transparent py-6 text-white'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -49,7 +49,7 @@ export default function Navbar({ onEnquire }: NavbarProps) {
           ))}
           <button 
             onClick={onEnquire}
-            className="bg-ink text-white px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-gold transition-all duration-300"
+            className={`${isScrolled ? 'bg-ink text-white' : 'bg-white text-ink'} px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-gold hover:text-white transition-all duration-300`}
           >
             Enquire Now
           </button>
